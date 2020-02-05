@@ -181,15 +181,15 @@ def drawGrid(width, rows, surface):
 
 
 def redrawWindow(surface):
-    global rows, width, snake, snack
+    global rows, width, snake0, snake1, snack
     surface.fill((0, 0, 0))
-    snake.draw(surface)
+    snake0.draw(surface)
+    snake1.draw(surface)
     snack.draw(surface)
     drawGrid(width, rows, surface)
-    score0 = 'Score: ' + str(len(snake.body))
-    textsurface = myfont.render(score0, False, (255,0,0))
+    scores = 'Score 1: ' + str(len(snake0.body)) + '\n Score2: ' + str(len(snake1.body))
+    textsurface = myfont.render(scores, False, (255,0,0))
     win.blit(textsurface,(0,BOARDSIZE))
-
     pygame.display.update()
 
 #generate a random place for a snack
@@ -229,13 +229,13 @@ def messageBox(score):
     tkinter.mainloop()
 
 def main():
-    global width, rows, snake, snack, win, textsurface, myfont
+    global width, rows, snake0, snake1, snack, win, textsurface, myfont
     width = BOARDSIZE
     rows = ROWS
     win = pygame.display.set_mode((width, width + int(BOARDSIZE/13)))
     snake0 = Snake((0, 255, 0), (8,8))
     snake1 = Snake((255, 0, 0), (10, 10))
-    snack = Cube(randomSnack(rows, snake), color=(255, 0, 0))
+    snack = Cube(randomSnack(rows, snake0), color=(255, 0, 0))
     flag = True
     pygame.font.init()
     myfont = pygame.font.SysFont('Comic Sans MS', int(BOARDSIZE / 20))
